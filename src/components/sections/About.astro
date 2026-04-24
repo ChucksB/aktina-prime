@@ -1,0 +1,54 @@
+---
+import Reveal from "../Reveal.tsx";
+
+const pillars = [
+  {
+    number: "01",
+    title: "Tech",
+    body: "End-to-end product design and development. From discovery and research through UX, UI, design systems, and engineering handoff.",
+  },
+  {
+    number: "02",
+    title: "Media",
+    body: "Light design, 3D pre-visualisation, AI video production, motion, and editorial visual work. Stories that stop the scroll.",
+  },
+  {
+    number: "03",
+    title: "Publicity",
+    body: "Brand campaigns, event media, outdoor advertising, and creative execution at city-wide scale.",
+  },
+];
+---
+
+<section id="about" class="section-y">
+  <div class="container-x">
+    <Reveal client:visible>
+      <div class="eyebrow"><span class="num">02</span><span>What We Do</span></div>
+      <h2 class="display-h mt-6 max-w-[20ch]">
+        Three disciplines. One studio.
+      </h2>
+      <p class="body-lg mt-6" style="color: var(--color-muted);">
+        Aktina Prime sits at the intersection of technology, media, and publicity. We build products, craft visual narratives, and engineer brand presence. The work spans full-cycle software, 3D light and motion media, AI-powered video, and large-scale event branding.
+      </p>
+    </Reveal>
+
+    <div class="mt-16 md:mt-24 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+      {pillars.map((p, i) => (
+        <Reveal client:visible delay={0.08 * i} y={40}>
+          <article class="card card-hover p-7 md:p-8 h-full flex flex-col">
+            <div class="flex items-start justify-between">
+              <span class="font-body text-[0.8125rem] font-medium tracking-[0.12em] uppercase" style="color: var(--color-brand);">
+                {p.number}
+              </span>
+              <span class="w-8 h-px" style="background: var(--color-line-strong);" aria-hidden="true" />
+            </div>
+            <h3 class="display-sub mt-8">{p.title}</h3>
+            <p class="mt-4 text-[0.9375rem] leading-[1.6]" style="color: var(--color-muted);">
+              {p.body}
+            </p>
+          </article>
+        </Reveal>
+      ))}
+    </div>
+  </div>
+</section>

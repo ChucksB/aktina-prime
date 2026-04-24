@@ -1,0 +1,37 @@
+---
+import Logo from "./Logo.astro";
+import NavMobileMenu from "./NavMobileMenu.tsx";
+
+const navLinks = [
+  { label: "Work", href: "#tech" },
+  { label: "Media", href: "#media" },
+  { label: "Publicity", href: "#publicity" },
+  { label: "Founder", href: "#founder" },
+];
+---
+
+<header
+  class="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl"
+  style="background: rgba(254, 254, 254, 0.82); box-shadow: var(--shadow-ring);"
+>
+  <div class="container-x flex items-center justify-between h-16 md:h-20">
+    <Logo size="sm" />
+
+    <nav class="hidden md:flex items-center gap-8" aria-label="Primary">
+      {navLinks.map((l) => (
+        <a href={l.href} class="nav-link">{l.label}</a>
+      ))}
+    </nav>
+
+    <div class="hidden md:block">
+      <a href="#contact" class="btn btn-primary btn-arrow text-[0.9375rem] py-[0.6rem] px-5">
+        <span>Let's Talk</span>
+        <span class="btn-arrow-glyph" aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <div class="md:hidden">
+      <NavMobileMenu client:load links={navLinks} />
+    </div>
+  </div>
+</header>

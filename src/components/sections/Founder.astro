@@ -1,0 +1,57 @@
+---
+import Reveal from "../Reveal.tsx";
+import Placeholder from "../Placeholder.astro";
+---
+
+<section id="founder" class="section-y" style="background: #FBFBFB;">
+  <div class="container-x">
+    <Reveal client:visible>
+      <div class="eyebrow"><span class="num">06</span><span>Leadership</span></div>
+      <h2 class="display-h mt-6 max-w-[18ch]">The mind behind the mission.</h2>
+    </Reveal>
+
+    <div class="mt-14 md:mt-20 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
+      <Reveal client:visible amount={0.2} className="md:col-span-5 col-span-1">
+        <Placeholder ratio="3/4" label="FOUNDER PORTRAIT · PLACEHOLDER" />
+      </Reveal>
+
+      <Reveal client:visible amount={0.2} className="md:col-span-7 col-span-1">
+        <div class="md:pt-4">
+          <p
+            class="font-display font-semibold text-[clamp(1.5rem,2.6vw,2.25rem)] leading-[1.2] tracking-[-0.01em]"
+            style="color: var(--color-ink-deep);"
+          >
+            “Creative vision and strategic acumen, operating at the nexus of technology, design, and media.”
+          </p>
+
+          <p class="body mt-10" style="color: var(--color-muted);">
+            The founder of Aktina Prime Global Services Limited brings a rare blend of creative vision and strategic acumen, operating at the nexus of technology, design, and media. With a track record of delivering complex creative and technical projects from concept to completion, they have become a trusted advisor to organisations navigating the intersection of culture, brand, and innovation.
+          </p>
+
+          <p class="body mt-5" style="color: var(--color-muted);">
+            As a consultant to forward-thinking organisations, the founder works closely with Allstar Ensemble, a pioneering youth development initiative leveraging music as a vehicle for empowerment and social change, operating in partnership with the Commonwealth. This consultancy underscores a deep commitment to purposeful work, building platforms and partnerships that go beyond commerce to create lasting cultural impact.
+          </p>
+
+          <dl class="mt-10 grid grid-cols-2 gap-x-8 gap-y-6 max-w-md">
+            <div>
+              <dt class="text-[0.75rem] uppercase tracking-[0.14em] font-medium" style="color: var(--color-muted);">
+                Name
+              </dt>
+              <dd class="mt-1 text-[1rem] font-medium text-[color:var(--color-ink-deep)]">
+                [Founder name]
+              </dd>
+            </div>
+            <div>
+              <dt class="text-[0.75rem] uppercase tracking-[0.14em] font-medium" style="color: var(--color-muted);">
+                Role
+              </dt>
+              <dd class="mt-1 text-[1rem] font-medium text-[color:var(--color-ink-deep)]">
+                Founder · CEO
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </Reveal>
+    </div>
+  </div>
+</section>

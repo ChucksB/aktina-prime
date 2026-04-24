@@ -1,0 +1,91 @@
+---
+import Reveal from "../Reveal.tsx";
+import Placeholder from "../Placeholder.astro";
+
+const works = [
+  {
+    num: "01",
+    tag: "Lighting · Experiential",
+    title: "Light design projects",
+    body: "Experiential lighting for events, installations, and architectural environments. Transforming physical spaces into emotional experiences.",
+    ratio: "4/3",
+    span: "md:col-span-7",
+    height: "",
+  },
+  {
+    num: "02",
+    tag: "3D · Pre-Visualisation",
+    title: "3D light design pre-vis",
+    body: "Before a single bulb is placed, we build it in 3D. Clients see and feel the finished lighting environment before production begins.",
+    ratio: "1/1",
+    span: "md:col-span-5",
+    height: "",
+  },
+  {
+    num: "03",
+    tag: "International · Showcase",
+    title: "Dubai Tour",
+    body: "A visual and light design engagement produced for an international tour. Aktina Prime executed at world-class production values across the run.",
+    ratio: "16/9",
+    span: "md:col-span-7",
+    height: "",
+  },
+  {
+    num: "04",
+    tag: "AI · Generative video",
+    title: "AI video creations",
+    body: "Generative AI tools used to produce cinematic video content at unprecedented speed and creative range. Human direction, machine capability.",
+    ratio: "1/1",
+    span: "md:col-span-5",
+    height: "",
+  },
+  {
+    num: "05",
+    tag: "Design · Advertising",
+    title: "Design and advert creation",
+    body: "Campaign concepts, digital creatives, motion graphics, print-ready assets. Adverts designed to convert. Visuals built to be remembered.",
+    ratio: "16/9",
+    span: "md:col-span-12",
+    height: "",
+  },
+];
+---
+
+<section id="media" class="section-y" style="background: #FBFBFB;">
+  <div class="container-x">
+    <Reveal client:visible>
+      <div class="eyebrow"><span class="num">04</span><span>Media</span></div>
+      <h2 class="display-h mt-6 max-w-[14ch]">Vision in every frame.</h2>
+      <p class="body-lg mt-6" style="color: var(--color-muted);">
+        The media division produces immersive visual work, from precision 3D light design to AI-driven video. Stories that stop the scroll.
+      </p>
+    </Reveal>
+
+    <div class="mt-16 md:mt-24 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-7">
+      {works.map((w, i) => (
+        <Reveal client:visible delay={0.05 * i} className={`${w.span} col-span-1`}>
+          <article class="card card-hover overflow-hidden h-full flex flex-col">
+            <Placeholder ratio={w.ratio as any} label={`${w.title.toUpperCase()} · PLACEHOLDER`} />
+
+            <div class="p-6 md:p-7">
+              <div class="flex items-baseline gap-3 flex-wrap">
+                <span class="font-body text-[0.75rem] font-medium tracking-[0.14em] uppercase" style="color: var(--color-brand);">
+                  {w.num}
+                </span>
+                <span class="font-body text-[0.75rem] font-medium tracking-[0.14em] uppercase" style="color: var(--color-muted);">
+                  {w.tag}
+                </span>
+              </div>
+              <h3 class="font-display font-semibold text-[clamp(1.5rem,2.2vw,2rem)] leading-[1.1] tracking-tight mt-4">
+                {w.title}
+              </h3>
+              <p class="mt-3 text-[0.9375rem] leading-[1.6]" style="color: var(--color-muted);">
+                {w.body}
+              </p>
+            </div>
+          </article>
+        </Reveal>
+      ))}
+    </div>
+  </div>
+</section>

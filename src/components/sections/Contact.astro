@@ -1,0 +1,68 @@
+---
+import Reveal from "../Reveal.tsx";
+import WordReveal from "../WordReveal.tsx";
+
+const socials = [
+  { label: "Instagram", href: "https://instagram.com/aktinaprime" },
+  { label: "X / Twitter", href: "https://twitter.com/aktinaprime" },
+  { label: "LinkedIn", href: "https://linkedin.com/company/aktinaprime" },
+  { label: "YouTube", href: "https://youtube.com/@aktinaprime" },
+];
+---
+
+<section id="contact" class="section-y">
+  <div class="container-x">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-end">
+      <Reveal client:visible className="md:col-span-8 col-span-1">
+        <div class="eyebrow"><span class="num">07</span><span>Connect</span></div>
+        <h2 class="font-display font-semibold text-[clamp(3rem,9vw,7.5rem)] leading-[0.95] tracking-[-0.025em] mt-6">
+          <WordReveal
+            client:visible
+            words={["Let's build", "something"]}
+            brandPeriod={true}
+            ariaLabel="Let's build something."
+          />
+        </h2>
+
+        <p class="body-lg mt-8" style="color: var(--color-muted);">
+          Whether you are looking for a technology partner, a creative production team, or a publicity powerhouse, Aktina Prime is ready.
+        </p>
+      </Reveal>
+
+      <Reveal client:visible className="md:col-span-4 col-span-1">
+        <div class="card p-8 md:p-10">
+          <div class="eyebrow"><span class="num">—</span><span>Start a conversation</span></div>
+
+          <a
+            href="mailto:hello@aktinaprime.com"
+            class="mt-6 block font-display font-semibold text-[clamp(1.25rem,2vw,1.75rem)] leading-[1.2] tracking-tight text-[color:var(--color-ink-deep)] break-all"
+          >
+            hello@aktinaprime.com
+          </a>
+
+          <a href="mailto:hello@aktinaprime.com" class="btn btn-accent mt-7 w-full">
+            Get In Touch
+          </a>
+
+          <div class="mt-8 pt-8" style="border-top: 1px solid var(--color-line);">
+            <div class="eyebrow mb-4"><span class="num">—</span><span>Follow</span></div>
+            <ul class="flex flex-col gap-3">
+              {socials.map((s) => (
+                <li>
+                  <a
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="link text-[0.9375rem]"
+                  >
+                    {s.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </Reveal>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,83 @@
+---
+import Reveal from "../Reveal.tsx";
+import Placeholder from "../Placeholder.astro";
+import StaggerList from "../StaggerList.tsx";
+
+const deliverables = [
+  {
+    title: "Billboard campaigns",
+    body: "Design, production coordination, and placement of large-format outdoor billboards across high-traffic locations. Maximum event visibility and brand saturation.",
+  },
+  {
+    title: "Lamp post banners",
+    body: "Street-level banner designs deployed across event zones and surrounding areas, creating an immersive city-wide brand corridor.",
+  },
+  {
+    title: "Print and graphic design",
+    body: "Posters, flyers, programmes, passes, and branded stationery, all cohesive within the Allstar Ensemble visual identity.",
+  },
+  {
+    title: "Video works",
+    body: "Event trailers, artist highlight reels, teaser campaigns, and post-event recap content for digital and broadcast distribution.",
+  },
+  {
+    title: "Social media creative",
+    body: "Motion graphics, static creatives, and story formats for cross-platform social rollout, driving audience engagement and event awareness.",
+  },
+  {
+    title: "Event signage and wayfinding",
+    body: "On-site branded signage, stage backdrops, step-and-repeat banners, and directional wayfinding design for a fully branded environment.",
+  },
+];
+---
+
+<section id="publicity" class="section-y">
+  <div class="container-x">
+    <Reveal client:visible>
+      <div class="eyebrow"><span class="num">05</span><span>Publicity</span></div>
+      <h2 class="display-h mt-6 max-w-[16ch]">Brands built in the open.</h2>
+      <p class="body-lg mt-6" style="color: var(--color-muted);">
+        Comprehensive publicity and brand activation. We do not promote, we engineer presence.
+      </p>
+    </Reveal>
+
+    <Reveal client:visible>
+      <article class="mt-16 md:mt-24 card overflow-hidden">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-0">
+          <div class="md:col-span-5 p-7 md:p-10 lg:p-12 order-2 md:order-1 flex flex-col">
+            <div class="eyebrow"><span class="num">Case</span><span>Featured Campaign</span></div>
+            <h3 class="font-display font-semibold text-[clamp(2rem,4.5vw,3.75rem)] leading-[0.98] tracking-[-0.02em] mt-5">
+              Allstar Ensemble
+            </h3>
+            <p class="mt-4 text-[1rem]" style="color: var(--color-muted);">
+              Full-scale event media and brand publicity.
+            </p>
+
+            <p class="body mt-7">
+              Aktina Prime served as the lead media and publicity partner for Allstar Ensemble, a frontier organisation driving youth development through the power of music, operating in collaboration with the Commonwealth to amplify young voices and talent across regions.
+            </p>
+            <p class="body mt-4">
+              We handled every dimension of the event's brand presence from the ground up.
+            </p>
+
+            <div class="mt-8 inline-flex items-center gap-3">
+              <span class="h-px w-8" style="background: var(--color-brand);" aria-hidden="true" />
+              <span class="text-[0.75rem] uppercase tracking-[0.14em] font-medium" style="color: var(--color-brand);">
+                Lead media and publicity partner
+              </span>
+            </div>
+          </div>
+
+          <div class="md:col-span-7 order-1 md:order-2 relative">
+            <Placeholder ratio="4/3" label="ALLSTAR ENSEMBLE · CAMPAIGN HERO" class="rounded-none md:rounded-l-none" />
+          </div>
+        </div>
+
+        <div class="p-7 md:p-10 lg:p-12 border-t" style="border-color: var(--color-line);">
+          <div class="eyebrow mb-6"><span class="num">—</span><span>Full Branding Works Delivered</span></div>
+          <StaggerList client:visible items={deliverables} />
+        </div>
+      </article>
+    </Reveal>
+  </div>
+</section>

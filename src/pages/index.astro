@@ -1,0 +1,20 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.tsx";
+import About from "../components/sections/About.astro";
+import Tech from "../components/sections/Tech.astro";
+import Media from "../components/sections/Media.astro";
+import Publicity from "../components/sections/Publicity.astro";
+import Founder from "../components/sections/Founder.astro";
+import Contact from "../components/sections/Contact.astro";
+---
+
+<BaseLayout>
+  <Hero client:load />
+  <About />
+  <Tech />
+  <Media />
+  <Publicity />
+  <Founder />
+  <Contact />
+</BaseLayout>

@@ -1,0 +1,21 @@
+---
+interface Props {
+  number: string;
+  eyebrow: string;
+  heading: string;
+  intro?: string;
+  align?: "left" | "center";
+}
+
+const { number, eyebrow, heading, intro, align = "left" } = Astro.props;
+---
+
+<div class={align === "center" ? "text-center" : "text-left"}>
+  <div class="eyebrow"><span class="num">{number}</span><span>{eyebrow}</span></div>
+  <h2 class="display-h mt-6 max-w-[18ch]" set:html={heading} />
+  {intro ? (
+    <p class={`body-lg muted mt-6 ${align === "center" ? "mx-auto" : ""}`} style="color: var(--color-muted);">
+      {intro}
+    </p>
+  ) : null}
+</div>

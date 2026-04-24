@@ -1,0 +1,81 @@
+---
+import Reveal from "../Reveal.tsx";
+import Placeholder from "../Placeholder.astro";
+
+const projects = [
+  {
+    num: "01",
+    name: "Passcoder",
+    tagline: "Identity. Simplified.",
+    role: "Full-cycle product design",
+    summary:
+      "A robust identity and access management platform engineered for developers and enterprises. Seamless integration for digital identities, credentials, and access protocols, at scale.",
+    detail:
+      "Aktina Prime led discovery, user research, information architecture, UX wireframing, UI design, design system creation, developer handoff, and iterative post-launch refinement. Every touchpoint of the Passcoder experience was conceived and crafted by our team.",
+    ratio: "4/3",
+  },
+  {
+    num: "02",
+    name: "Fast Fast",
+    tagline: "Speed is the feature.",
+    role: "Product interface design, UX strategy, visual identity",
+    summary:
+      "A high-velocity logistics and delivery platform engineered for the on-demand economy. Real-time tracking, intelligent routing, seamless rider and customer interfaces.",
+    detail:
+      "Our team contributed to key phases of Fast Fast's development lifecycle: product interface design, user experience strategy, and visual identity alignment, ensuring the platform's design language communicated urgency, reliability, and ease-of-use.",
+    ratio: "4/3",
+  },
+];
+---
+
+<section id="tech" class="section-y">
+  <div class="container-x">
+    <Reveal client:visible>
+      <div class="eyebrow"><span class="num">03</span><span>Technology</span></div>
+      <h2 class="display-h mt-6 max-w-[16ch]">Products built to last.</h2>
+    </Reveal>
+
+    <div class="mt-16 md:mt-24 flex flex-col gap-12 md:gap-20">
+      {projects.map((p, i) => (
+        <Reveal client:visible amount={0.15}>
+          <article class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
+            <div class={`md:col-span-6 ${i % 2 === 1 ? "md:order-2" : ""}`}>
+              <Placeholder ratio={p.ratio as any} label={`${p.name.toUpperCase()} · PLACEHOLDER`} />
+            </div>
+
+            <div class={`md:col-span-6 ${i % 2 === 1 ? "md:order-1" : ""}`}>
+              <div class="flex items-baseline gap-3">
+                <span class="font-body text-[0.8125rem] font-medium tracking-[0.12em] uppercase" style="color: var(--color-brand);">
+                  {p.num}
+                </span>
+                <span class="font-body text-[0.8125rem] font-medium tracking-[0.12em] uppercase" style="color: var(--color-muted);">
+                  Case Study
+                </span>
+              </div>
+
+              <h3 class="font-display font-semibold text-[clamp(2rem,4vw,3.5rem)] leading-[0.95] tracking-[-0.02em] mt-5">
+                {p.name}
+              </h3>
+              <p class="mt-3 text-[1rem]" style="color: var(--color-muted);">{p.tagline}</p>
+
+              <p class="body mt-7">{p.summary}</p>
+
+              <div class="mt-7 rounded-[12px]" style="box-shadow: var(--shadow-ring); padding: 1.25rem 1.5rem;">
+                <div class="text-[0.75rem] uppercase tracking-[0.14em] font-medium" style="color: var(--color-brand);">
+                  Our Role
+                </div>
+                <div class="mt-2 text-[0.9375rem] font-medium text-[color:var(--color-ink-deep)]">
+                  {p.role}
+                </div>
+              </div>
+
+              <p class="body mt-7" style="color: var(--color-muted);">{p.detail}</p>
+
+              <a href="#" class="link mt-8 inline-block">View project →</a>
+            </div>
+          </article>
+        </Reveal>
+      ))}
+    </div>
+  </div>
+</section>
