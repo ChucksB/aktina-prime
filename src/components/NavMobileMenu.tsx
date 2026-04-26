@@ -13,14 +13,32 @@ export default function NavMobileMenu({ links }: Props) {
   const [open, setOpen] = useState(false);
   const reduce = useReducedMotion();
 
+  // iOS-safe scroll lock: freeze body via position: fixed, preserving scrollY.
+  // Setting html { overflow: hidden } does not reliably lock scroll on iOS Safari.
   useEffect(() => {
-    if (open) {
-      document.documentElement.style.overflow = "hidden";
-    } else {
-      document.documentElement.style.overflow = "";
-    }
+    if (!open) return;
+    const scrollY = window.scrollY;
+    const body = document.body;
+    const prev = {
+      position: body.style.position,
+      top: body.style.top,
+      left: body.style.left,
+      right: body.style.right,
+      width: body.style.width,
+    };
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.left = "0";
+    body.style.right = "0";
+    body.style.width = "100%";
+
     return () => {
-      document.documentElement.style.overflow = "";
+      body.style.position = prev.position;
+      body.style.top = prev.top;
+      body.style.left = prev.left;
+      body.style.right = prev.right;
+      body.style.width = prev.width;
+      window.scrollTo(0, scrollY);
     };
   }, [open]);
 
@@ -39,8 +57,12 @@ export default function NavMobileMenu({ links }: Props) {
         aria-label={open ? "Close menu" : "Open menu"}
         aria-expanded={open}
         onClick={() => setOpen((o) => !o)}
-        className="inline-flex items-center justify-center w-11 h-11 rounded-full"
-        style={{ boxShadow: "var(--shadow-ring)" }}
+        // z-[90] keeps the toggle clickable above the overlay (z-[80]) so users can close with the X.
+        className="relative z-[90] inline-flex items-center justify-center w-11 h-11 rounded-full"
+        style={{
+          boxShadow: "var(--shadow-ring)",
+          background: "var(--color-canvas)",
+        }}
       >
         <span className="relative block w-5 h-[14px]" aria-hidden="true">
           <motion.span
@@ -71,15 +93,22 @@ export default function NavMobileMenu({ links }: Props) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: reduce ? 0 : 0.25, ease: EASE_QUINT }}
-            className="fixed inset-0 z-40"
-            style={{ background: "rgba(254,254,254,0.98)", backdropFilter: "blur(12px)" }}
+            transition={{ duration: reduce ? 0 : 0.22, ease: EASE_QUINT }}
+            // Fixed full-viewport overlay.
+            // - Solid BG (no rgba, no backdrop-filter) — iOS Safari sometimes renders semi-opaque + backdrop-filter as more transparent than declared.
+            // - height: 100dvh — respects the iOS address-bar dynamic viewport.
+            // - z-[80] — above header (z-50) and scroll-progress (z-60).
+            className="fixed left-0 right-0 top-0 z-[80]"
+            style={{
+              height: "100dvh",
+              background: "var(--color-canvas)",
+            }}
           >
             <nav
               aria-label="Mobile primary"
               className="h-full w-full flex flex-col justify-center px-8"
             >
-              <ul className="flex flex-col gap-6">
+              <ul className="flex flex-col gap-6 list-none p-0 m-0">
                 {links.map((l, i) => (
                   <motion.li
                     key={l.href}

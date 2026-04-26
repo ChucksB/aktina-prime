@@ -241,6 +241,54 @@ body {
   transform: scaleX(1);
 }
 
+/* ---------- Form inputs ---------- */
+
+.input {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--color-ink);
+  background: var(--color-canvas);
+  border: 0;
+  box-shadow: var(--shadow-ring);
+  border-radius: 8px;
+  padding: 0.75rem 0.875rem;
+  min-height: 44px;
+  transition: box-shadow 200ms var(--ease-quint);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.input::placeholder {
+  color: var(--color-muted);
+}
+
+.input:focus,
+.input:focus-visible {
+  outline: 0;
+  box-shadow:
+    0 0 0 1px var(--color-ink),
+    0 0 0 4px rgba(230, 57, 70, 0.15);
+}
+
+textarea.input {
+  min-height: 120px;
+  line-height: 1.6;
+}
+
+select.input {
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--color-ink-deep) 50%),
+    linear-gradient(135deg, var(--color-ink-deep) 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) 50%,
+    calc(100% - 13px) 50%;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 2rem;
+}
+
 /* ---------- Cards ---------- */
 
 .card {

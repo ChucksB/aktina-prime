@@ -5,16 +5,42 @@ import {
   useTransform,
   type Variants,
 } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { SplineScene } from "@/components/ui/splite";
+
+/** Matches Tailwind's `lg` breakpoint — 3D renders only at this size or larger. */
+const LG_BREAKPOINT = "(min-width: 1024px)";
+
+function useIsDesktop() {
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia(LG_BREAKPOINT);
+    const update = () => setIsDesktop(mq.matches);
+    update();
+    if (typeof mq.addEventListener === "function") {
+      mq.addEventListener("change", update);
+      return () => mq.removeEventListener("change", update);
+    }
+    // Older Safari fallback.
+    (mq as any).addListener(update);
+    return () => (mq as any).removeListener(update);
+  }, []);
+
+  return isDesktop;
+}
 
 const EASE_EXPO: [number, number, number, number] = [0.16, 1, 0.3, 1];
 const EASE_QUINT: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 const WORDS = ["Technology", "Media", "Impact"];
+const SPLINE_SCENE =
+  "https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode";
 
 export default function Hero() {
   const reduce = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
+  const isDesktop = useIsDesktop();
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -63,6 +89,15 @@ export default function Hero() {
     },
   };
 
+  const stage: Variants = {
+    hidden: { opacity: 0, scale: reduce ? 1 : 0.98 },
+    show: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: reduce ? 0 : 1.1, ease: EASE_EXPO, delay: reduce ? 0 : 0.3 },
+    },
+  };
+
   return (
     <section
       ref={sectionRef}
@@ -84,48 +119,72 @@ export default function Hero() {
         className="container-x relative"
         style={reduce ? undefined : { opacity: heroOpacity }}
       >
-        <motion.div variants={soft} className="eyebrow">
-          <span className="num">01</span>
-          <span>Aktina Prime Global Services</span>
-        </motion.div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          {/* Left: text content */}
+          <div className="lg:col-span-7">
+            <motion.div variants={soft} className="eyebrow">
+              <span className="num">01</span>
+              <span>Aktina Prime Global Services</span>
+            </motion.div>
 
-        <h1 className="display-hero mt-8 md:mt-10">
-          <span className="sr-only">Technology. Media. Impact.</span>
-          <span aria-hidden="true" className="block">
-            {WORDS.map((w) => (
-              <span key={w} className="block overflow-hidden pb-[0.08em]">
-                <motion.span variants={line} className="block">
-                  {w}
-                  <span style={{ color: "var(--color-brand)" }}>.</span>
-                </motion.span>
+            <h1
+              className="font-display font-semibold mt-8 md:mt-10"
+              style={{
+                fontSize: "clamp(2.75rem, 8vw, 6.25rem)",
+                lineHeight: 0.95,
+                letterSpacing: "-0.025em",
+              }}
+            >
+              <span className="sr-only">Technology. Media. Impact.</span>
+              <span aria-hidden="true" className="block">
+                {WORDS.map((w) => (
+                  <span key={w} className="block overflow-hidden pb-[0.08em]">
+                    <motion.span variants={line} className="block">
+                      {w}
+                      <span style={{ color: "var(--color-brand)" }}>.</span>
+                    </motion.span>
+                  </span>
+                ))}
               </span>
-            ))}
-          </span>
-        </h1>
+            </h1>
 
-        <motion.p
-          variants={soft}
-          className="body-lg mt-10 md:mt-12"
-          style={{ maxWidth: "48ch" }}
-        >
-          A multi-disciplinary technology, media, and publicity studio.
-          Products built, campaigns executed, media produced, at international scale.
-        </motion.p>
+            <motion.p
+              variants={soft}
+              className="body-lg mt-8 md:mt-10"
+              style={{ maxWidth: "48ch" }}
+            >
+              A multi-disciplinary technology, media, and publicity studio.
+              Products built, campaigns executed, media produced, at international scale.
+            </motion.p>
 
-        <motion.div variants={cta} className="mt-10 flex flex-wrap items-center gap-3">
-          <a href="#tech" className="btn btn-accent btn-arrow">
-            <span>Explore Our Work</span>
-            <span className="btn-arrow-glyph" aria-hidden="true">→</span>
-          </a>
-          <a href="#contact" className="btn btn-ghost btn-arrow">
-            <span>Get In Touch</span>
-            <span className="btn-arrow-glyph" aria-hidden="true">→</span>
-          </a>
-        </motion.div>
+            <motion.div variants={cta} className="mt-9 flex flex-wrap items-center gap-3">
+              <a href="#tech" className="btn btn-accent btn-arrow">
+                <span>Explore Our Work</span>
+                <span className="btn-arrow-glyph" aria-hidden="true">→</span>
+              </a>
+              <a href="#contact" className="btn btn-ghost btn-arrow">
+                <span>Get In Touch</span>
+                <span className="btn-arrow-glyph" aria-hidden="true">→</span>
+              </a>
+            </motion.div>
+          </div>
+
+          {/*
+            Right column — Spline 3D.
+            Rendered only on lg+ (≥1024px). On narrower screens the layout
+            cascades to a single column and the 3D is skipped entirely, so
+            the Spline runtime never downloads on mobile.
+          */}
+          {isDesktop ? (
+            <motion.div variants={stage} className="lg:col-span-5 w-full">
+              <ProductWindow />
+            </motion.div>
+          ) : null}
+        </div>
 
         <motion.div
           variants={cta}
-          className="mt-16 md:mt-24 flex items-center gap-4"
+          className="mt-14 md:mt-20 flex items-center gap-4"
         >
           <span
             className="inline-block h-px w-10 bg-[color:var(--color-line-strong)]"
@@ -146,6 +205,38 @@ export default function Hero() {
         </motion.div>
       </motion.div>
     </section>
+  );
+}
+
+function ProductWindow() {
+  return (
+    <div className="relative w-full h-[500px] md:h-[620px] lg:h-[780px]">
+      {/* Top-left affordance label, pinned to the nominal frame */}
+      <div className="absolute top-2 left-2 z-[2] flex items-center gap-2 pointer-events-none">
+        <span
+          className="inline-block h-1.5 w-1.5 rounded-full"
+          style={{ background: "var(--color-brand)" }}
+          aria-hidden="true"
+        />
+        <span
+          className="font-body text-[0.6875rem] uppercase tracking-[0.16em]"
+          style={{ color: "var(--color-muted)" }}
+        >
+          Interactive
+        </span>
+      </div>
+
+      {/*
+        Canvas bleeds well beyond the column on desktop so extreme-pose
+        animations (outstretched arm, head tilt) stay inside the canvas and
+        don't clip. pointer-events:none keeps the bleed area click-through for
+        text/CTAs; Spline listens via setGlobalEvents(true) so drag + track
+        still work from anywhere on the page.
+      */}
+      <div className="absolute inset-y-0 -inset-x-0 lg:-left-64 lg:-right-64 lg:-top-12 lg:-bottom-12 pointer-events-none">
+        <SplineScene scene={SPLINE_SCENE} className="w-full h-full" scale={0.75} />
+      </div>
+    </div>
   );
 }
 

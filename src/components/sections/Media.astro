@@ -1,6 +1,5 @@
 ---
 import Reveal from "../Reveal.tsx";
-import Placeholder from "../Placeholder.astro";
 
 const works = [
   {
@@ -8,45 +7,30 @@ const works = [
     tag: "Lighting · Experiential",
     title: "Light design projects",
     body: "Experiential lighting for events, installations, and architectural environments. Transforming physical spaces into emotional experiences.",
+    image: "/images/media/light-design.jpg",
+    alt: "Stage lighting installation",
     ratio: "4/3",
     span: "md:col-span-7",
-    height: "",
   },
   {
     num: "02",
-    tag: "3D · Pre-Visualisation",
-    title: "3D light design pre-vis",
-    body: "Before a single bulb is placed, we build it in 3D. Clients see and feel the finished lighting environment before production begins.",
-    ratio: "1/1",
-    span: "md:col-span-5",
-    height: "",
-  },
-  {
-    num: "03",
-    tag: "International · Showcase",
-    title: "Dubai Tour",
-    body: "A visual and light design engagement produced for an international tour. Aktina Prime executed at world-class production values across the run.",
-    ratio: "16/9",
-    span: "md:col-span-7",
-    height: "",
-  },
-  {
-    num: "04",
     tag: "AI · Generative video",
     title: "AI video creations",
     body: "Generative AI tools used to produce cinematic video content at unprecedented speed and creative range. Human direction, machine capability.",
+    image: "/images/media/ai-video.jpg",
+    alt: "AI generative cinematic still",
     ratio: "1/1",
     span: "md:col-span-5",
-    height: "",
   },
   {
-    num: "05",
+    num: "03",
     tag: "Design · Advertising",
     title: "Design and advert creation",
     body: "Campaign concepts, digital creatives, motion graphics, print-ready assets. Adverts designed to convert. Visuals built to be remembered.",
+    image: "/images/media/design-advert.jpg",
+    alt: "Campaign design artwork",
     ratio: "16/9",
     span: "md:col-span-12",
-    height: "",
   },
 ];
 ---
@@ -65,7 +49,14 @@ const works = [
       {works.map((w, i) => (
         <Reveal client:visible delay={0.05 * i} className={`${w.span} col-span-1`}>
           <article class="card card-hover overflow-hidden h-full flex flex-col">
-            <Placeholder ratio={w.ratio as any} label={`${w.title.toUpperCase()} · PLACEHOLDER`} />
+            <img
+              src={w.image}
+              alt={w.alt}
+              loading="lazy"
+              decoding="async"
+              class="w-full block"
+              style={`aspect-ratio: ${w.ratio}; object-fit: cover;`}
+            />
 
             <div class="p-6 md:p-7">
               <div class="flex items-baseline gap-3 flex-wrap">

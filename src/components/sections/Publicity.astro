@@ -1,6 +1,5 @@
 ---
 import Reveal from "../Reveal.tsx";
-import Placeholder from "../Placeholder.astro";
 import StaggerList from "../StaggerList.tsx";
 
 const deliverables = [
@@ -69,7 +68,14 @@ const deliverables = [
           </div>
 
           <div class="md:col-span-7 order-1 md:order-2 relative">
-            <Placeholder ratio="4/3" label="ALLSTAR ENSEMBLE · CAMPAIGN HERO" class="rounded-none md:rounded-l-none" />
+            <img
+              src="/images/publicity/allstar-ensemble.jpg"
+              alt="Allstar Ensemble campaign hero"
+              loading="lazy"
+              decoding="async"
+              class="w-full h-full block"
+              style="aspect-ratio: 4/3; object-fit: cover;"
+            />
           </div>
         </div>
 

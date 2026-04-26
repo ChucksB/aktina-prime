@@ -1,6 +1,5 @@
 ---
 import Reveal from "../Reveal.tsx";
-import Placeholder from "../Placeholder.astro";
 
 const projects = [
   {
@@ -12,6 +11,8 @@ const projects = [
       "A robust identity and access management platform engineered for developers and enterprises. Seamless integration for digital identities, credentials, and access protocols, at scale.",
     detail:
       "Aktina Prime led discovery, user research, information architecture, UX wireframing, UI design, design system creation, developer handoff, and iterative post-launch refinement. Every touchpoint of the Passcoder experience was conceived and crafted by our team.",
+    image: "/images/tech/passcoder.jpg",
+    alt: "Passcoder identity platform",
     ratio: "4/3",
   },
   {
@@ -23,6 +24,8 @@ const projects = [
       "A high-velocity logistics and delivery platform engineered for the on-demand economy. Real-time tracking, intelligent routing, seamless rider and customer interfaces.",
     detail:
       "Our team contributed to key phases of Fast Fast's development lifecycle: product interface design, user experience strategy, and visual identity alignment, ensuring the platform's design language communicated urgency, reliability, and ease-of-use.",
+    image: "/images/tech/fast-fast.jpg",
+    alt: "Fast Fast logistics platform",
     ratio: "4/3",
   },
 ];
@@ -40,7 +43,14 @@ const projects = [
         <Reveal client:visible amount={0.15}>
           <article class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
             <div class={`md:col-span-6 ${i % 2 === 1 ? "md:order-2" : ""}`}>
-              <Placeholder ratio={p.ratio as any} label={`${p.name.toUpperCase()} · PLACEHOLDER`} />
+              <img
+                src={p.image}
+                alt={p.alt}
+                loading="lazy"
+                decoding="async"
+                class="card w-full block"
+                style={`aspect-ratio: ${p.ratio}; object-fit: cover; border-radius: 12px;`}
+              />
             </div>
 
             <div class={`md:col-span-6 ${i % 2 === 1 ? "md:order-1" : ""}`}>

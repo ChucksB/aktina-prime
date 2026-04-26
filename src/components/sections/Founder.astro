@@ -1,6 +1,5 @@
 ---
 import Reveal from "../Reveal.tsx";
-import Placeholder from "../Placeholder.astro";
 ---
 
 <section id="founder" class="section-y" style="background: #FBFBFB;">
@@ -12,7 +11,14 @@ import Placeholder from "../Placeholder.astro";
 
     <div class="mt-14 md:mt-20 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
       <Reveal client:visible amount={0.2} className="md:col-span-5 col-span-1">
-        <Placeholder ratio="3/4" label="FOUNDER PORTRAIT · PLACEHOLDER" />
+        <img
+          src="/images/founder/portrait.jpg"
+          alt="Aktina Prime founder portrait"
+          loading="lazy"
+          decoding="async"
+          class="card w-full block"
+          style="aspect-ratio: 3/4; object-fit: cover; border-radius: 12px;"
+        />
       </Reveal>
 
       <Reveal client:visible amount={0.2} className="md:col-span-7 col-span-1">
@@ -38,7 +44,7 @@ import Placeholder from "../Placeholder.astro";
                 Name
               </dt>
               <dd class="mt-1 text-[1rem] font-medium text-[color:var(--color-ink-deep)]">
-                [Founder name]
+                Chukwunyere Boniface
               </dd>
             </div>
             <div>
